@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>تحويل آمن</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .rainbow-text {
+      font-size: 38px;
+      font-weight: bold;
+      animation: rainbow 5s linear infinite;
+      margin-top: 40px;
+    }
+
+    @keyframes rainbow {
+      0%{color:red;}
+      14%{color:orange;}
+      28%{color:yellow;}
+      42%{color:green;}
+      57%{color:blue;}
+      71%{color:indigo;}
+      85%{color:violet;}
+      100%{color:red;}
+    }
+
+    .money {
+      position: absolute;
+      font-size: 32px;
+      animation: fall linear infinite;
+      color: white;
+    }
+
+    @keyframes fall {
+      0% {top: -50px;}
+      100% {top: 100vh;}
+    }
+
+    .bank-icon {
+      font-size: 140px;
+      color: white;
+      margin-top: 60px;
+    }
+
+    .referral-button {
+      font-size: 28px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+      color: black;
+      font-weight: bold;
+      margin-top: 80px;
+      animation: rainbow 7s linear infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="title" class="rainbow-text">حوّل مبالغك بأمان</div>
+  <div class="bank-icon">🏦</div>
+
+  <a id="referralLink" href="https://remit.ly/e2yp0xkz" target="_blank">
+    <div id="referralText" class="referral-button">احصل على تحويلك الآن</div>
+  </a>
+
+  <script>
+    // تغيير اللغات للجملة الرئيسية
+    const phrases = [
+      "حوّل مبالغك بأمان",
+      "Send money safely",
+      "Envoyez de l'argent en toute sécurité",
+      "Envía dinero con seguridad",
+      "Geld sicher senden",
+      "Manda soldi in sicurezza",
+      "安全に送金する",
+      "أرسل الأموال بأمان",
+      "Send dine penge sikkert",
+      "Trimitere bani în siguranță",
+      "Bezit de güvenle para gönderin",
+      "Переказ грошей безпечно",
+      "Отправляйте деньги безопасно",
+      "Furkan amani kwa usalama",
+      "Bħala trasferiment sigur ta' flus",
+      "गोपनीय रूप से पैसे भेजें",
+      "돈을 안전하게 보내기",
+      "Kupeleka fedha salama",
+    ];
+    let titleIndex = 0;
+    setInterval(() => {
+      document.getElementById("title").textContent = phrases[titleIndex];
+      titleIndex = (titleIndex + 1) % phrases.length;
+    }, 5000);
+
+    // تغيير النص على رابط الإحالة
+    const referralPhrases = [
+      "احصل على تحويلك الآن",
+      "Get your transfer now",
+      "Obtenez votre transfert maintenant",
+      "Obtén tu transferencia ahora",
+      "Erhalten Sie Ihre Überweisung jetzt",
+      "Ottieni il tuo trasferimento ora",
+      "今すぐ送金を受け取る",
+      "الحصول على الحوالة الآن",
+      "Få din overførsel nu",
+      "Primește-ți transferul acum",
+      "Şimdi transferinizi alın",
+      "Отримати свій переказ",
+      "Получите перевод сейчас",
+      "Pata uhamisho wako sasa",
+      "Ikseb it-trasferiment tiegħek issa",
+      "अपना ट्रांसफर अभी प्राप्त करें",
+      "지금 송금 받기",
+      "Pokea uhamisho wako sasa",
+    ];
+    let referralIndex = 0;
+    setInterval(() => {
+      document.getElementById("referralText").textContent = referralPhrases[referralIndex];
+      referralIndex = (referralIndex + 1) % referralPhrases.length;
+    }, 6500);
+
+    // إنشاء رموز العملات تتساقط
+    const moneySymbols = ['💵', '💶', '💷', '💴', '💸', '🪙', '🪙', '💰', '💳'];
+    function createMoney() {
+      const money = document.createElement('div');
+      money.classList.add('money');
+      money.style.left = Math.random() * 100 + 'vw';
+      money.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      money.textContent = moneySymbols[Math.floor(Math.random() * moneySymbols.length)];
+      document.body.appendChild(money);
+
+      setTimeout(() => {
+        money.remove();
+      }, 7000);
+    }
+    setInterval(createMoney, 300);
+  </script>
+
+</body>
+</html>
