@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>تحويل آمن</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
@@ -13,10 +14,10 @@
     }
 
     .rainbow-text {
-      font-size: 38px;
+      font-size: 8vw; /* زيادة قليلا لتناسب الهواتف */
       font-weight: bold;
       animation: rainbow 5s linear infinite;
-      margin-top: 40px;
+      margin-top: 5vh;
     }
 
     @keyframes rainbow {
@@ -32,7 +33,7 @@
 
     .money {
       position: absolute;
-      font-size: 32px;
+      font-size: 6vw; /* أكبر قليلاً لتناسب الشاشات الصغيرة */
       animation: fall linear infinite;
       color: white;
     }
@@ -43,22 +44,53 @@
     }
 
     .bank-icon {
-      font-size: 140px;
+      font-size: 22vw; /* أكبر قليلاً لملء شاشة الهاتف */
       color: white;
-      margin-top: 60px;
+      margin-top: 4vh;
     }
 
     .referral-button {
-      font-size: 28px;
-      padding: 15px 30px;
+      font-size: 5vw;  /* مناسب للهواتف */
+      padding: 4vw 6vw;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
       color: black;
       font-weight: bold;
-      margin-top: 80px;
-      animation: rainbow 7s linear infinite;
+      margin-top: 7vh;
+      transition: background-color 0.5s ease;
+      /* إزالة التدرج لأننا سنغير الخلفية ديناميكياً */
+      background: transparent;
+    }
+
+    /* خلفية متغيرة للزر حسب اللون */
+    .referral-button.red { background-color: #FF4B4B; }
+    .referral-button.orange { background-color: #FF9F45; }
+    .referral-button.yellow { background-color: #FFE54B; color: black; }
+    .referral-button.green { background-color: #4BB543; color: white; }
+    .referral-button.blue { background-color: #4B79FF; color: white; }
+    .referral-button.indigo { background-color: #5A3E99; color: white; }
+    .referral-button.violet { background-color: #8A4BFF; color: white; }
+
+    @media (min-width: 768px) {
+      .rainbow-text {
+        font-size: 38px;
+      }
+
+      .money {
+        font-size: 32px;
+      }
+
+      .bank-icon {
+        font-size: 140px;
+      }
+
+      .referral-button {
+        font-size: 28px;
+        padding: 15px 30px;
+        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+        color: black;
+      }
     }
   </style>
 </head>
@@ -68,65 +100,72 @@
   <div class="bank-icon">🏦</div>
 
   <a id="referralLink" href="https://remit.ly/e2yp0xkz" target="_blank">
-    <div id="referralText" class="referral-button">احصل على تحويلك الآن</div>
+    <div id="referralText" class="referral-button red">احصل على تحويلك الآن</div>
   </a>
 
   <script>
-    // تغيير اللغات للجملة الرئيسية
     const phrases = [
-      "حوّل مبالغك بأمان",
-      "Send money safely",
-      "Envoyez de l'argent en toute sécurité",
-      "Envía dinero con seguridad",
-      "Geld sicher senden",
-      "Manda soldi in sicurezza",
-      "安全に送金する",
-      "أرسل الأموال بأمان",
-      "Send dine penge sikkert",
-      "Trimitere bani în siguranță",
-      "Bezit de güvenle para gönderin",
-      "Переказ грошей безпечно",
-      "Отправляйте деньги безопасно",
-      "Furkan amani kwa usalama",
-      "Bħala trasferiment sigur ta' flus",
-      "गोपनीय रूप से पैसे भेजें",
-      "돈을 안전하게 보내기",
-      "Kupeleka fedha salama",
+      {text: "حوّل مبالغك بأمان", color: "red"},
+      {text: "Send money safely", color: "orange"},
+      {text: "Envoyez de l'argent en toute sécurité", color: "yellow"},
+      {text: "Envía dinero con seguridad", color: "green"},
+      {text: "Geld sicher senden", color: "blue"},
+      {text: "Manda soldi in sicurezza", color: "indigo"},
+      {text: "安全に送金する", color: "violet"},
+      {text: "أرسل الأموال بأمان", color: "red"},
+      {text: "Send dine penge sikkert", color: "orange"},
+      {text: "Trimitere bani în siguranță", color: "yellow"},
+      {text: "Bezit de güvenle para gönderin", color: "green"},
+      {text: "Переказ грошей безпечно", color: "blue"},
+      {text: "Отправляйте деньги безопасно", color: "indigo"},
+      {text: "Furkan amani kwa usalama", color: "violet"},
+      {text: "Bħala trasferiment sigur ta' flus", color: "red"},
+      {text: "गोपनीय रूप से पैसे भेजें", color: "orange"},
+      {text: "돈을 안전하게 보내기", color: "yellow"},
+      {text: "Kupeleka fedha salama", color: "green"},
     ];
     let titleIndex = 0;
     setInterval(() => {
-      document.getElementById("title").textContent = phrases[titleIndex];
+      const title = document.getElementById("title");
+      title.textContent = phrases[titleIndex].text;
+      title.style.color = phrases[titleIndex].color;
       titleIndex = (titleIndex + 1) % phrases.length;
-    }, 5000);
+    }, 7000);
 
-    // تغيير النص على رابط الإحالة
     const referralPhrases = [
-      "احصل على تحويلك الآن",
-      "Get your transfer now",
-      "Obtenez votre transfert maintenant",
-      "Obtén tu transferencia ahora",
-      "Erhalten Sie Ihre Überweisung jetzt",
-      "Ottieni il tuo trasferimento ora",
-      "今すぐ送金を受け取る",
-      "الحصول على الحوالة الآن",
-      "Få din overførsel nu",
-      "Primește-ți transferul acum",
-      "Şimdi transferinizi alın",
-      "Отримати свій переказ",
-      "Получите перевод сейчас",
-      "Pata uhamisho wako sasa",
-      "Ikseb it-trasferiment tiegħek issa",
-      "अपना ट्रांसफर अभी प्राप्त करें",
-      "지금 송금 받기",
-      "Pokea uhamisho wako sasa",
+      {text: "احصل على تحويلك الآن", color: "red"},
+      {text: "Get your transfer now", color: "orange"},
+      {text: "Obtenez votre transfert maintenant", color: "yellow"},
+      {text: "Obtén tu transferencia ahora", color: "green"},
+      {text: "Erhalten Sie Ihre Überweisung jetzt", color: "blue"},
+      {text: "Ottieni il tuo trasferimento ora", color: "indigo"},
+      {text: "今すぐ送金を受け取る", color: "violet"},
+      {text: "الحصول على الحوالة الآن", color: "red"},
+      {text: "Få din overførsel nu", color: "orange"},
+      {text: "Primește-ți transferul acum", color: "yellow"},
+      {text: "Şimdi transferinizi alın", color: "green"},
+      {text: "Отримати свій переказ", color: "blue"},
+      {text: "Получите перевод сейчас", color: "indigo"},
+      {text: "Pata uhamisho wako sasa", color: "violet"},
+      {text: "Ikseb it-trasferiment tiegħek issa", color: "red"},
+      {text: "अपना ट्रांसफर अभी प्राप्त करें", color: "orange"},
+      {text: "지금 송금 받기", color: "yellow"},
+      {text: "Pokea uhamisho wako sasa", color: "green"},
     ];
     let referralIndex = 0;
     setInterval(() => {
-      document.getElementById("referralText").textContent = referralPhrases[referralIndex];
-      referralIndex = (referralIndex + 1) % referralPhrases.length;
-    }, 6500);
+      const referralText = document.getElementById("referralText");
+      referralText.textContent = referralPhrases[referralIndex].text;
 
-    // إنشاء رموز العملات تتساقط
+      // إزالة جميع ألوان الخلفية
+      referralText.className = 'referral-button';
+
+      // أضف اللون المناسب
+      referralText.classList.add(referralPhrases[referralIndex].color);
+
+      referralIndex = (referralIndex + 1) % referralPhrases.length;
+    }, 7000);
+
     const moneySymbols = ['💵', '💶', '💷', '💴', '💸', '🪙', '🪙', '💰', '💳'];
     function createMoney() {
       const money = document.createElement('div');
