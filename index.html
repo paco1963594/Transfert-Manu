@@ -14,7 +14,7 @@
     }
 
     .rainbow-text {
-      font-size: 8vw; /* زيادة قليلا لتناسب الهواتف */
+      font-size: 8vw;
       font-weight: bold;
       animation: rainbow 5s linear infinite;
       margin-top: 5vh;
@@ -33,7 +33,7 @@
 
     .money {
       position: absolute;
-      font-size: 6vw; /* أكبر قليلاً لتناسب الشاشات الصغيرة */
+      font-size: 6vw;
       animation: fall linear infinite;
       color: white;
     }
@@ -44,13 +44,13 @@
     }
 
     .bank-icon {
-      font-size: 22vw; /* أكبر قليلاً لملء شاشة الهاتف */
+      font-size: 22vw;
       color: white;
       margin-top: 4vh;
     }
 
     .referral-button {
-      font-size: 5vw;  /* مناسب للهواتف */
+      font-size: 5vw;
       padding: 4vw 6vw;
       border: none;
       border-radius: 10px;
@@ -59,11 +59,9 @@
       font-weight: bold;
       margin-top: 7vh;
       transition: background-color 0.5s ease;
-      /* إزالة التدرج لأننا سنغير الخلفية ديناميكياً */
       background: transparent;
     }
 
-    /* خلفية متغيرة للزر حسب اللون */
     .referral-button.red { background-color: #FF4B4B; }
     .referral-button.orange { background-color: #FF9F45; }
     .referral-button.yellow { background-color: #FFE54B; color: black; }
@@ -92,12 +90,30 @@
         color: black;
       }
     }
+
+    .emoji-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4vw;
+      margin-top: 4vh;
+    }
+
+    .emoji {
+      font-size: 22vw;
+      color: white;
+    }
   </style>
 </head>
 <body>
 
   <div id="title" class="rainbow-text">حوّل مبالغك بأمان</div>
-  <div class="bank-icon">🏦</div>
+
+  <div class="emoji-wrapper">
+    <div class="emoji">🌍</div>
+    <div class="bank-icon">🏦</div>
+    <div class="emoji">🌍</div>
+  </div>
 
   <a id="referralLink" href="https://remit.ly/e2yp0xkz" target="_blank">
     <div id="referralText" class="referral-button red">احصل على تحويلك الآن</div>
@@ -156,13 +172,8 @@
     setInterval(() => {
       const referralText = document.getElementById("referralText");
       referralText.textContent = referralPhrases[referralIndex].text;
-
-      // إزالة جميع ألوان الخلفية
       referralText.className = 'referral-button';
-
-      // أضف اللون المناسب
       referralText.classList.add(referralPhrases[referralIndex].color);
-
       referralIndex = (referralIndex + 1) % referralPhrases.length;
     }, 7000);
 
