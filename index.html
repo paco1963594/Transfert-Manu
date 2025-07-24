@@ -1,137 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bank Symbol with Falling Currencies</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تحويل آمن</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background-color: black;
-      overflow: hidden;
+      background: black;
+      color: white;
       font-family: Arial, sans-serif;
+      overflow: hidden;
     }
 
-    .rainbow-text {
-      font-size: 24px;
-      font-weight: bold;
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA...') no-repeat center center;
+      background-size: contain;
+      z-index: 0;
+      opacity: 0.2;
+    }
+
+    .title {
+      position: absolute;
+      top: 10%;
+      width: 100%;
       text-align: center;
-      margin: 20px 10px;
-      animation: rainbow 5s linear infinite;
-      color: white;
+      font-size: 6vw;
+      font-weight: bold;
+      background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: rainbow 10s linear infinite;
+      z-index: 1;
     }
 
     @keyframes rainbow {
-      0% { color: red; }
-      14% { color: orange; }
-      28% { color: yellow; }
-      42% { color: green; }
-      56% { color: blue; }
-      70% { color: indigo; }
-      84% { color: violet; }
-      100% { color: red; }
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
     }
 
-    .image-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-    }
-
-    .image-container img {
-      max-width: 90%;
-      height: auto;
-    }
-
-    .floating-text {
+    .falling-money {
       position: absolute;
-      bottom: 60px;
-      width: 100%;
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      color: white;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.6);
+      top: -10%;
+      font-size: 3vw;
+      animation: fall 10s linear infinite;
+      z-index: 1;
     }
 
-    @media (max-width: 768px) {
-      .rainbow-text {
-        font-size: 18px;
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh) translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(120vh) translateX(50px);
+        opacity: 0;
+      }
+    }
+
+    .link-box {
+      position: absolute;
+      bottom: 10%;
+      width: 90%;
+      left: 5%;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 5vw;
+      z-index: 2;
+      color: #00ffcc;
+    }
+
+    a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .title {
+        font-size: 7vw;
       }
 
-      .floating-text {
-        font-size: 16px;
+      .falling-money {
+        font-size: 5vw;
+      }
+
+      .link-box {
+        font-size: 6vw;
       }
     }
   </style>
 </head>
 <body>
+  <div class="background"></div>
 
-  <div class="rainbow-text" id="rainbowText">حول مبالغك بأمان</div>
+  <div class="title" id="titleText">حول أموالك بأمان</div>
 
-  <div class="image-container">
-    <img src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-GShpx9tnNYpHYO2fWJolS3uB/user-K33DUul8FZcvZQ8kUeCg0RV6/img-gTiSgTEET5tpTE9B92jrz0pG.png?st=2025-07-23T21%3A34%3A25Z&se=2025-07-23T23%3A34%3A25Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=1ee9df88-2901-4eb1-99f2-f4e63ffb899b&sktid=c37c318d-98d4-4d9f-bc6b-4e8eb1939384&skt=2024-07-22T01%3A10%3A20Z&ske=2024-07-23T01%3A10%3A20Z&sks=b&skv=2021-08-06&sig=ZHVgVGsE93miQdd0vlV6%2FZy7Mxg6syQ8R38Q1b6V%2F%2Fk%3D" alt="Bank Symbol">
-  </div>
+  <div class="falling-money" style="left:10%">💵</div>
+  <div class="falling-money" style="left:30%">💶</div>
+  <div class="falling-money" style="left:50%">💴</div>
+  <div class="falling-money" style="left:70%">💷</div>
+  <div class="falling-money" style="left:90%">💳</div>
 
-  <div class="floating-text" id="affiliateText">
-    <a href="https://remit.ly/e2yp0xkz" target="_blank" style="color: white; text-decoration: none;">حول أموالك عبر Remitly بعمولة منخفضة</a>
+  <div class="link-box" id="linkBox">
+    <a href="https://remit.ly/e2yp0xkz" id="linkText">https://remit.ly/e2yp0xkz</a>
   </div>
 
   <script>
-    const languages = [
-      "حول مبالغك بأمان", // عربي
-      "Send money securely", // إنجليزي
-      "Envoyez de l'argent en toute sécurité", // فرنسي
-      "Envía dinero de forma segura", // إسباني
-      "Geld sicher überweisen", // ألماني
-      "Invia denaro in modo sicuro", // إيطالي
-      "Wyślij pieniądze bezpiecznie", // بولندي
-      "Geld veilig verzenden", // هولندي
-      "Отправляйте деньги безопасно", // روسي
-      "安全に送金する", // ياباني
-      "Sicher Geld senden", // ألماني
-      "송금은 안전하게", // كوري
-      "Envie dinheiro com segurança", // برتغالي
-      "Skicka pengar säkert", // سويدي
-      "Sigurno pošaljite novac", // صربي/كرواتي
+    const titles = [
+      "حول أموالك بأمان", "Transfer Your Money Safely", "Transférez votre argent en toute sécurité",
+      "Envía tu dinero con seguridad", "Geld sicher überweisen", "Invia i tuoi soldi in sicurezza",
+      "安全に送金する", "Переводите деньги безопасно", "Envoie larjan ou byen sekirite",
+      "تحويل الأموال بأمان", "Sikker pengeoverførsel", "Sigurni prijenos novca", "امن ترسیل کریں",
+      "Pieniądze bezpiecznie", "Mengirim uang dengan aman"
     ];
 
-    const affiliatePhrases = [
-      "حول أموالك عبر Remitly بعمولة منخفضة", 
-      "Transfer your money safely via Remitly", 
-      "Transférez votre argent en toute sécurité via Remitly", 
-      "Transfiere tu dinero con seguridad con Remitly",
-      "Überweise dein Geld sicher mit Remitly",
-      "Invia denaro con Remitly in sicurezza",
-      "Przelej pieniądze bezpiecznie przez Remitly",
-      "Verstuur geld veilig met Remitly",
-      "Отправьте деньги безопасно через Remitly",
-      "Remitlyで安全に送金", 
-      "송금은 Remitly와 함께 안전하게", 
-      "Envie dinheiro com segurança com a Remitly",
-      "Skicka pengar tryggt med Remitly",
-      "Pošaljite novac sigurno putem Remitly"
+    const links = [
+      "https://remit.ly/e2yp0xkz", "https://remit.ly/e2yp0xkz", "https://remit.ly/e2yp0xkz",
+      "https://remit.ly/e2yp0xkz", "https://remit.ly/e2yp0xkz", "https://remit.ly/e2yp0xkz",
+      "https://remit.ly/e2yp0xkz", "https://remit.ly/e2yp0xkz", "https://remit.ly/e2yp0xkz",
+      "https://remit.ly/e2yp0xkz", "https://remit.ly/e2yp0xkz", "https://remit.ly/e2yp0xkz",
+      "https://remit.ly/e2yp0xkz", "https://remit.ly/e2yp0xkz", "https://remit.ly/e2yp0xkz"
     ];
 
-    let index = 0;
-    let affiliateIndex = 0;
-
+    let i = 0;
     setInterval(() => {
-      index = (index + 1) % languages.length;
-      document.getElementById('rainbowText').textContent = languages[index];
-    }, 7000); // كل 7 ثواني
-
-    setInterval(() => {
-      affiliateIndex = (affiliateIndex + 1) % affiliatePhrases.length;
-      document.getElementById('affiliateText').innerHTML = `
-        <a href="https://remit.ly/e2yp0xkz" target="_blank" style="color: white; text-decoration: none;">
-          ${affiliatePhrases[affiliateIndex]}
-        </a>
-      `;
-    }, 7000); // كل 7 ثواني
+      document.getElementById('titleText').textContent = titles[i];
+      document.getElementById('linkText').textContent = links[i];
+      i = (i + 1) % titles.length;
+    }, 6000);
   </script>
 </body>
 </html>
